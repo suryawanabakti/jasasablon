@@ -1,58 +1,177 @@
 {
-  "_fonts-DkuEHybc.css": {
-    "file": "assets/fonts-DkuEHybc.css",
-    "src": "_fonts-DkuEHybc.css"
+  "_admin-layout-CMmy_dKy.js": {
+    "file": "assets/admin-layout-CMmy_dKy.js",
+    "name": "admin-layout",
+    "imports": [
+      "resources/js/app.tsx",
+      "_jsx-runtime-DTarKgHJ.js"
+    ]
   },
-  "_instrument-sans-400-normal-D1W7dsQl.woff": {
-    "file": "assets/instrument-sans-400-normal-D1W7dsQl.woff",
-    "src": "_instrument-sans-400-normal-D1W7dsQl.woff"
+  "_customer-layout-DYIJJ1IV.js": {
+    "file": "assets/customer-layout-DYIJJ1IV.js",
+    "name": "customer-layout",
+    "imports": [
+      "resources/js/app.tsx",
+      "_jsx-runtime-DTarKgHJ.js"
+    ]
   },
-  "_instrument-sans-400-normal-DRC__1Mx.woff2": {
-    "file": "assets/instrument-sans-400-normal-DRC__1Mx.woff2",
-    "src": "_instrument-sans-400-normal-DRC__1Mx.woff2"
+  "_fonts-oFWm8ML5.css": {
+    "file": "assets/fonts-oFWm8ML5.css",
+    "src": "_fonts-oFWm8ML5.css"
   },
-  "_instrument-sans-400-normal-Q_nF8v4l.woff2": {
-    "file": "assets/instrument-sans-400-normal-Q_nF8v4l.woff2",
-    "src": "_instrument-sans-400-normal-Q_nF8v4l.woff2"
+  "_jsx-runtime-DTarKgHJ.js": {
+    "file": "assets/jsx-runtime-DTarKgHJ.js",
+    "name": "jsx-runtime",
+    "imports": [
+      "resources/js/app.tsx"
+    ]
   },
-  "_instrument-sans-400-normal-r32jotim.woff": {
-    "file": "assets/instrument-sans-400-normal-r32jotim.woff",
-    "src": "_instrument-sans-400-normal-r32jotim.woff"
+  "_lexend-300-normal-BkyiKD57.woff2": {
+    "file": "assets/lexend-300-normal-BkyiKD57.woff2",
+    "src": "_lexend-300-normal-BkyiKD57.woff2"
   },
-  "_instrument-sans-500-normal-CAxz3nsc.woff": {
-    "file": "assets/instrument-sans-500-normal-CAxz3nsc.woff",
-    "src": "_instrument-sans-500-normal-CAxz3nsc.woff"
+  "_lexend-300-normal-Bvq1pCw4.woff": {
+    "file": "assets/lexend-300-normal-Bvq1pCw4.woff",
+    "src": "_lexend-300-normal-Bvq1pCw4.woff"
   },
-  "_instrument-sans-500-normal-CTEe1bJa.woff2": {
-    "file": "assets/instrument-sans-500-normal-CTEe1bJa.woff2",
-    "src": "_instrument-sans-500-normal-CTEe1bJa.woff2"
+  "_lexend-300-normal-DJx7rAFT.woff": {
+    "file": "assets/lexend-300-normal-DJx7rAFT.woff",
+    "src": "_lexend-300-normal-DJx7rAFT.woff"
   },
-  "_instrument-sans-500-normal-Dk9ku72i.woff2": {
-    "file": "assets/instrument-sans-500-normal-Dk9ku72i.woff2",
-    "src": "_instrument-sans-500-normal-Dk9ku72i.woff2"
+  "_lexend-300-normal-DZKhWvmP.woff2": {
+    "file": "assets/lexend-300-normal-DZKhWvmP.woff2",
+    "src": "_lexend-300-normal-DZKhWvmP.woff2"
   },
-  "_instrument-sans-500-normal-Z6ESRlEs.woff": {
-    "file": "assets/instrument-sans-500-normal-Z6ESRlEs.woff",
-    "src": "_instrument-sans-500-normal-Z6ESRlEs.woff"
+  "_lexend-300-normal-DghY_3bB.woff": {
+    "file": "assets/lexend-300-normal-DghY_3bB.woff",
+    "src": "_lexend-300-normal-DghY_3bB.woff"
   },
-  "_instrument-sans-600-normal-B7fBEWYG.woff2": {
-    "file": "assets/instrument-sans-600-normal-B7fBEWYG.woff2",
-    "src": "_instrument-sans-600-normal-B7fBEWYG.woff2"
+  "_lexend-300-normal-pH_8eE6B.woff2": {
+    "file": "assets/lexend-300-normal-pH_8eE6B.woff2",
+    "src": "_lexend-300-normal-pH_8eE6B.woff2"
   },
-  "_instrument-sans-600-normal-B9e8oLYv.woff": {
-    "file": "assets/instrument-sans-600-normal-B9e8oLYv.woff",
-    "src": "_instrument-sans-600-normal-B9e8oLYv.woff"
+  "_lexend-400-normal-CHypAkT3.woff": {
+    "file": "assets/lexend-400-normal-CHypAkT3.woff",
+    "src": "_lexend-400-normal-CHypAkT3.woff"
   },
-  "_instrument-sans-600-normal-BsaQcF38.woff2": {
-    "file": "assets/instrument-sans-600-normal-BsaQcF38.woff2",
-    "src": "_instrument-sans-600-normal-BsaQcF38.woff2"
+  "_lexend-400-normal-CwRJVcUA.woff2": {
+    "file": "assets/lexend-400-normal-CwRJVcUA.woff2",
+    "src": "_lexend-400-normal-CwRJVcUA.woff2"
   },
-  "_instrument-sans-600-normal-DMks36a2.woff": {
-    "file": "assets/instrument-sans-600-normal-DMks36a2.woff",
-    "src": "_instrument-sans-600-normal-DMks36a2.woff"
+  "_lexend-400-normal-D38JI5AK.woff2": {
+    "file": "assets/lexend-400-normal-D38JI5AK.woff2",
+    "src": "_lexend-400-normal-D38JI5AK.woff2"
+  },
+  "_lexend-400-normal-D9P7pMo-.woff": {
+    "file": "assets/lexend-400-normal-D9P7pMo-.woff",
+    "src": "_lexend-400-normal-D9P7pMo-.woff"
+  },
+  "_lexend-400-normal-DoLa7jNB.woff2": {
+    "file": "assets/lexend-400-normal-DoLa7jNB.woff2",
+    "src": "_lexend-400-normal-DoLa7jNB.woff2"
+  },
+  "_lexend-400-normal-mPlHoWg5.woff": {
+    "file": "assets/lexend-400-normal-mPlHoWg5.woff",
+    "src": "_lexend-400-normal-mPlHoWg5.woff"
+  },
+  "_lexend-500-normal-Bo17xs96.woff2": {
+    "file": "assets/lexend-500-normal-Bo17xs96.woff2",
+    "src": "_lexend-500-normal-Bo17xs96.woff2"
+  },
+  "_lexend-500-normal-Bos7Oy9U.woff2": {
+    "file": "assets/lexend-500-normal-Bos7Oy9U.woff2",
+    "src": "_lexend-500-normal-Bos7Oy9U.woff2"
+  },
+  "_lexend-500-normal-D9x1QWTH.woff": {
+    "file": "assets/lexend-500-normal-D9x1QWTH.woff",
+    "src": "_lexend-500-normal-D9x1QWTH.woff"
+  },
+  "_lexend-500-normal-DbCmXT_D.woff": {
+    "file": "assets/lexend-500-normal-DbCmXT_D.woff",
+    "src": "_lexend-500-normal-DbCmXT_D.woff"
+  },
+  "_lexend-500-normal-Dl-X5nog.woff2": {
+    "file": "assets/lexend-500-normal-Dl-X5nog.woff2",
+    "src": "_lexend-500-normal-Dl-X5nog.woff2"
+  },
+  "_lexend-500-normal-EFAPmUTE.woff": {
+    "file": "assets/lexend-500-normal-EFAPmUTE.woff",
+    "src": "_lexend-500-normal-EFAPmUTE.woff"
+  },
+  "_lexend-600-normal-BXtyp5LP.woff": {
+    "file": "assets/lexend-600-normal-BXtyp5LP.woff",
+    "src": "_lexend-600-normal-BXtyp5LP.woff"
+  },
+  "_lexend-600-normal-BxEVPgxw.woff": {
+    "file": "assets/lexend-600-normal-BxEVPgxw.woff",
+    "src": "_lexend-600-normal-BxEVPgxw.woff"
+  },
+  "_lexend-600-normal-Cr1ePs6O.woff2": {
+    "file": "assets/lexend-600-normal-Cr1ePs6O.woff2",
+    "src": "_lexend-600-normal-Cr1ePs6O.woff2"
+  },
+  "_lexend-600-normal-DSBzZxpA.woff": {
+    "file": "assets/lexend-600-normal-DSBzZxpA.woff",
+    "src": "_lexend-600-normal-DSBzZxpA.woff"
+  },
+  "_lexend-600-normal-DdvlkEkX.woff2": {
+    "file": "assets/lexend-600-normal-DdvlkEkX.woff2",
+    "src": "_lexend-600-normal-DdvlkEkX.woff2"
+  },
+  "_lexend-600-normal-hDcqLAH9.woff2": {
+    "file": "assets/lexend-600-normal-hDcqLAH9.woff2",
+    "src": "_lexend-600-normal-hDcqLAH9.woff2"
+  },
+  "_lexend-700-normal-BrGlFDtO.woff2": {
+    "file": "assets/lexend-700-normal-BrGlFDtO.woff2",
+    "src": "_lexend-700-normal-BrGlFDtO.woff2"
+  },
+  "_lexend-700-normal-CcWyeg4T.woff2": {
+    "file": "assets/lexend-700-normal-CcWyeg4T.woff2",
+    "src": "_lexend-700-normal-CcWyeg4T.woff2"
+  },
+  "_lexend-700-normal-DVyJlN8t.woff": {
+    "file": "assets/lexend-700-normal-DVyJlN8t.woff",
+    "src": "_lexend-700-normal-DVyJlN8t.woff"
+  },
+  "_lexend-700-normal-DqO8md6r.woff2": {
+    "file": "assets/lexend-700-normal-DqO8md6r.woff2",
+    "src": "_lexend-700-normal-DqO8md6r.woff2"
+  },
+  "_lexend-700-normal-NEp7hM5T.woff": {
+    "file": "assets/lexend-700-normal-NEp7hM5T.woff",
+    "src": "_lexend-700-normal-NEp7hM5T.woff"
+  },
+  "_lexend-700-normal-iR1cPiNX.woff": {
+    "file": "assets/lexend-700-normal-iR1cPiNX.woff",
+    "src": "_lexend-700-normal-iR1cPiNX.woff"
+  },
+  "_lexend-800-normal-B0JWHALI.woff2": {
+    "file": "assets/lexend-800-normal-B0JWHALI.woff2",
+    "src": "_lexend-800-normal-B0JWHALI.woff2"
+  },
+  "_lexend-800-normal-B27Hd6aN.woff2": {
+    "file": "assets/lexend-800-normal-B27Hd6aN.woff2",
+    "src": "_lexend-800-normal-B27Hd6aN.woff2"
+  },
+  "_lexend-800-normal-BcJVUnx_.woff": {
+    "file": "assets/lexend-800-normal-BcJVUnx_.woff",
+    "src": "_lexend-800-normal-BcJVUnx_.woff"
+  },
+  "_lexend-800-normal-DLOhWP8n.woff": {
+    "file": "assets/lexend-800-normal-DLOhWP8n.woff",
+    "src": "_lexend-800-normal-DLOhWP8n.woff"
+  },
+  "_lexend-800-normal-r3QZLne4.woff": {
+    "file": "assets/lexend-800-normal-r3QZLne4.woff",
+    "src": "_lexend-800-normal-r3QZLne4.woff"
+  },
+  "_lexend-800-normal-sVzxf3WX.woff2": {
+    "file": "assets/lexend-800-normal-sVzxf3WX.woff2",
+    "src": "_lexend-800-normal-sVzxf3WX.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-Bn6fdAgy.css",
+    "file": "assets/app-BJKLN7T8.css",
     "name": "app",
     "names": [
       "app.css"
@@ -61,21 +180,187 @@
     "isEntry": true
   },
   "resources/js/app.tsx": {
-    "file": "assets/app-CQ0wMx8C.js",
+    "file": "assets/app-BB5a3Vud.js",
     "name": "app",
     "src": "resources/js/app.tsx",
     "isEntry": true,
     "dynamicImports": [
+      "resources/js/pages/admin/dashboard.tsx",
+      "resources/js/pages/admin/orders/index.tsx",
+      "resources/js/pages/admin/payments/index.tsx",
+      "resources/js/pages/admin/products/create.tsx",
+      "resources/js/pages/admin/products/edit.tsx",
+      "resources/js/pages/admin/products/index.tsx",
+      "resources/js/pages/admin/products/show.tsx",
+      "resources/js/pages/auth/login.tsx",
+      "resources/js/pages/auth/register.tsx",
+      "resources/js/pages/customer/orders/index.tsx",
+      "resources/js/pages/customer/orders/show.tsx",
+      "resources/js/pages/customer/products/index.tsx",
+      "resources/js/pages/dashboard.tsx",
+      "resources/js/pages/materials.tsx",
       "resources/js/pages/welcome.tsx"
     ]
   },
+  "resources/js/pages/admin/dashboard.tsx": {
+    "file": "assets/dashboard-0eBqeFjF.js",
+    "name": "dashboard",
+    "src": "resources/js/pages/admin/dashboard.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_jsx-runtime-DTarKgHJ.js",
+      "_admin-layout-CMmy_dKy.js"
+    ]
+  },
+  "resources/js/pages/admin/orders/index.tsx": {
+    "file": "assets/orders-CfUtgBYG.js",
+    "name": "orders",
+    "src": "resources/js/pages/admin/orders/index.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_jsx-runtime-DTarKgHJ.js",
+      "_admin-layout-CMmy_dKy.js"
+    ]
+  },
+  "resources/js/pages/admin/payments/index.tsx": {
+    "file": "assets/payments-DTwzWqWf.js",
+    "name": "payments",
+    "src": "resources/js/pages/admin/payments/index.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_jsx-runtime-DTarKgHJ.js",
+      "_admin-layout-CMmy_dKy.js"
+    ]
+  },
+  "resources/js/pages/admin/products/create.tsx": {
+    "file": "assets/create-Ben1u_be.js",
+    "name": "create",
+    "src": "resources/js/pages/admin/products/create.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_jsx-runtime-DTarKgHJ.js",
+      "_admin-layout-CMmy_dKy.js"
+    ]
+  },
+  "resources/js/pages/admin/products/edit.tsx": {
+    "file": "assets/edit-DaGCj7j6.js",
+    "name": "edit",
+    "src": "resources/js/pages/admin/products/edit.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_jsx-runtime-DTarKgHJ.js",
+      "_admin-layout-CMmy_dKy.js"
+    ]
+  },
+  "resources/js/pages/admin/products/index.tsx": {
+    "file": "assets/products-DYpF51Dk.js",
+    "name": "products",
+    "src": "resources/js/pages/admin/products/index.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_jsx-runtime-DTarKgHJ.js",
+      "_admin-layout-CMmy_dKy.js"
+    ]
+  },
+  "resources/js/pages/admin/products/show.tsx": {
+    "file": "assets/show-B2_0M2iM.js",
+    "name": "show",
+    "src": "resources/js/pages/admin/products/show.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_jsx-runtime-DTarKgHJ.js",
+      "_admin-layout-CMmy_dKy.js"
+    ]
+  },
+  "resources/js/pages/auth/login.tsx": {
+    "file": "assets/login-h7egEDpQ.js",
+    "name": "login",
+    "src": "resources/js/pages/auth/login.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_jsx-runtime-DTarKgHJ.js"
+    ]
+  },
+  "resources/js/pages/auth/register.tsx": {
+    "file": "assets/register-DjqWlPVX.js",
+    "name": "register",
+    "src": "resources/js/pages/auth/register.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_jsx-runtime-DTarKgHJ.js"
+    ]
+  },
+  "resources/js/pages/customer/orders/index.tsx": {
+    "file": "assets/orders-DY4Xjly1.js",
+    "name": "orders",
+    "src": "resources/js/pages/customer/orders/index.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_customer-layout-DYIJJ1IV.js",
+      "_jsx-runtime-DTarKgHJ.js"
+    ]
+  },
+  "resources/js/pages/customer/orders/show.tsx": {
+    "file": "assets/show-BzoDRj5K.js",
+    "name": "show",
+    "src": "resources/js/pages/customer/orders/show.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_customer-layout-DYIJJ1IV.js",
+      "_jsx-runtime-DTarKgHJ.js"
+    ]
+  },
+  "resources/js/pages/customer/products/index.tsx": {
+    "file": "assets/products-OCPqixzr.js",
+    "name": "products",
+    "src": "resources/js/pages/customer/products/index.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_customer-layout-DYIJJ1IV.js",
+      "_jsx-runtime-DTarKgHJ.js"
+    ]
+  },
+  "resources/js/pages/dashboard.tsx": {
+    "file": "assets/dashboard-DpOZVQJY.js",
+    "name": "dashboard",
+    "src": "resources/js/pages/dashboard.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_customer-layout-DYIJJ1IV.js",
+      "_jsx-runtime-DTarKgHJ.js"
+    ]
+  },
+  "resources/js/pages/materials.tsx": {
+    "file": "assets/materials-BjLqHm9P.js",
+    "name": "materials",
+    "src": "resources/js/pages/materials.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_jsx-runtime-DTarKgHJ.js"
+    ]
+  },
   "resources/js/pages/welcome.tsx": {
-    "file": "assets/welcome-DX2JoXby.js",
+    "file": "assets/welcome-CxrZcbGD.js",
     "name": "welcome",
     "src": "resources/js/pages/welcome.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "resources/js/app.tsx"
+      "resources/js/app.tsx",
+      "_jsx-runtime-DTarKgHJ.js"
     ]
   }
 }
