@@ -75,7 +75,7 @@ export default function Welcome() {
                         </div>
                         <div className="relative mt-20 lg:mt-0 lg:w-2/5">
                             <div className="relative z-10 overflow-hidden rounded-[3rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.15)] ring-1 ring-white/20">
-                                <img src="/images/hero.png" alt="Sablon Workshop" className="w-full transform transition-transform duration-1000 hover:scale-110" />
+                                <img src="/images/hero.jpeg" alt="Sablon Workshop" className="w-full transform transition-transform duration-1000 hover:scale-110" />
                             </div>
                             <div className="absolute -bottom-8 -left-8 z-20 flex items-center space-x-4 rounded-3xl bg-white p-5 shadow-2xl border border-slate-50">
                                 <div className="flex -space-x-3">
@@ -200,9 +200,11 @@ export default function Welcome() {
                         <div>
                             <h4 className="mb-8 font-black text-white uppercase tracking-[0.2em] text-xs">Info Kontak</h4>
                             <ul className="space-y-5 text-sm font-bold">
-                                <li className="flex items-center space-x-3 italic text-slate-500">
-                                    <span>📍</span>
-                                    <span>Indonesia, Makassar</span>
+                                <li>
+                                    <span className="flex items-start space-x-3 italic text-slate-500">
+                                        <span>📍</span>
+                                        <span className="leading-relaxed">Komp. Kodam Katangka No.E/-/01, RT.002/RW.02, Gn. Sari, Kec. Rappocini, Kota Makassar, Sulawesi Selatan 90222</span>
+                                    </span>
                                 </li>
                                 <li className="flex items-center space-x-3">
                                     <span>📞</span>

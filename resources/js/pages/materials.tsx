@@ -191,9 +191,11 @@ export default function Materials() {
                         <div>
                             <h4 className="mb-8 font-black text-white uppercase tracking-[0.2em] text-xs">Info Kontak</h4>
                             <ul className="space-y-5 text-sm font-bold">
-                                <li className="flex items-center space-x-3 italic text-slate-500">
-                                    <span>📍</span>
-                                    <span>Indonesia, Makassar</span>
+                                <li>
+                                    <span className="flex items-start space-x-3 italic text-slate-500">
+                                        <span>📍</span>
+                                        <span className="leading-relaxed">Komp. Kodam Katangka No.E/-/01, RT.002/RW.02, Gn. Sari, Kec. Rappocini, Kota Makassar, Sulawesi Selatan 90222</span>
+                                    </span>
                                 </li>
                                 <li className="flex items-center space-x-3">
                                     <span>📞</span>

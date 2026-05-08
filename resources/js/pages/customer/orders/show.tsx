@@ -92,13 +92,13 @@ export default function OrderShow({ order }: Props) {
                                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Metode Bayar</p>
                                     <p className="font-bold text-slate-900">Transfer Bank</p>
                                 </div>
-                                <div className="rounded-2xl bg-slate-50 p-4">
+                                <div className="rounded-2xl bg-slate-50 p-4 text-center">
                                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">No. Rekening</p>
-                                    <p className="font-bold text-slate-900">123-456-7890 (BCA)</p>
+                                    <p className="font-bold text-slate-900">8260282795 (BCA)</p>
                                 </div>
-                                <div className="rounded-2xl bg-slate-50 p-4">
+                                <div className="rounded-2xl bg-slate-50 p-4 text-center">
                                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">A/N</p>
-                                    <p className="font-bold text-slate-900">Sablon Kita Official</p>
+                                    <p className="font-bold text-slate-900 uppercase">Irfandi Amir</p>
                                 </div>
                             </div>
                         </div>
