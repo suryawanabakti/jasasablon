@@ -15,7 +15,7 @@ class OrderController extends Controller
     public function index()
     {
         return Inertia::render('customer/orders/index', [
-            'orders' => Order::with(['product', 'payments'])
+            'orders' => Order::with(['product', 'payments', 'review'])
                 ->where('user_id', Auth::id())
                 ->latest()
                 ->get()
@@ -28,11 +28,20 @@ class OrderController extends Controller
             'product_id' => 'required|exists:products,id',
             'qty' => 'required|integer|min:1',
             'note' => 'nullable|string',
-            'design' => 'nullable|image|max:5120', // Max 5MB
+            'design' => 'nullable|image|max:5120',
+            'addon_ids' => 'nullable|array',
+            'addon_ids.*' => 'exists:addons,id',
+            'addon_notes' => 'nullable|array',
+            'addon_notes.*' => 'nullable|string|max:500',
         ]);
 
         $product = Product::find($request->product_id);
-        $total_price = $product->price * $request->qty;
+        $base_price = $product->price;
+
+        $addons = \App\Models\Addon::whereIn('id', $request->addon_ids ?? [])->get();
+        $addons_price = $addons->sum('price');
+
+        $total_price = ($base_price + $addons_price) * $request->qty;
 
         $design_path = null;
         if ($request->hasFile('design')) {
@@ -49,6 +58,14 @@ class OrderController extends Controller
             'design' => $design_path,
         ]);
 
+        $addonNotes = $request->addon_notes ?? [];
+        foreach ($addons as $addon) {
+            $order->addons()->attach($addon->id, [
+                'price' => $addon->price,
+                'notes' => $addonNotes[$addon->id] ?? null,
+            ]);
+        }
+
         return redirect()->route('orders.show', $order->id);
     }
 
@@ -59,7 +76,7 @@ class OrderController extends Controller
         }
 
         return Inertia::render('customer/orders/show', [
-            'order' => $order->load(['product', 'payments'])
+            'order' => $order->load(['product', 'payments', 'review', 'addons'])
         ]);
     }
 

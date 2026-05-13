@@ -11,6 +11,7 @@ interface Order {
     status: string;
     design: string | null;
     note: string | null;
+    addons: { name: string; pivot: { price: number; notes: string | null } }[];
     created_at: string;
 }
 
@@ -139,6 +140,18 @@ export default function OrdersIndex({ orders, filters = {} }: Props) {
                                     <td className="py-6">
                                         <p className="text-sm font-medium text-slate-700">{order.product.name}</p>
                                         <p className="text-xs text-slate-400 font-bold">{order.qty} pcs</p>
+                                        {order.addons && order.addons.length > 0 && (
+                                            <div className="mt-2 space-y-1">
+                                                {order.addons.map((addon, i) => (
+                                                    <div key={i} className="text-[11px]">
+                                                        <span className="font-bold text-orange-600">+ {addon.name}</span>
+                                                        {addon.pivot.notes && (
+                                                            <span className="text-slate-400 italic ml-1">({addon.pivot.notes})</span>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
                                     </td>
                                     <td className="py-6">
                                         {order.design ? (

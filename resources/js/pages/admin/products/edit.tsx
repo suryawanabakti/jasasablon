@@ -8,24 +8,33 @@ interface ProductImage {
     is_primary: boolean;
 }
 
+interface Category {
+    id: number;
+    name: string;
+}
+
 interface Product {
     id: number;
     name: string;
     description: string;
     price: number;
+    category_id: number | null;
+    category: Category | null;
     image: string | null;
     images: ProductImage[];
 }
 
 interface Props {
     product: Product;
+    categories: Category[];
 }
 
-export default function ProductEdit({ product }: Props) {
+export default function ProductEdit({ product, categories }: Props) {
     const { data, setData, processing, errors } = useForm({
         name: product.name,
         description: product.description,
         price: product.price,
+        category_id: product.category_id || ('' as string | number),
         images: [] as File[]
     });
 
@@ -101,6 +110,22 @@ export default function ProductEdit({ product }: Props) {
                                     required
                                 />
                                 {errors.name && <p className="mt-2 text-xs text-red-500 font-bold">{errors.name}</p>}
+                            </div>
+
+                            <div>
+                                <label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-3">Kategori</label>
+                                <select
+                                    value={data.category_id}
+                                    onChange={(e) => setData('category_id', Number(e.target.value))}
+                                    className="w-full rounded-2xl border-slate-100 bg-slate-50 px-5 py-4 text-sm focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-500/10 transition-all outline-none cursor-pointer"
+                                    required
+                                >
+                                    <option value="">Pilih Kategori...</option>
+                                    {categories.map((cat) => (
+                                        <option key={cat.id} value={cat.id}>{cat.name}</option>
+                                    ))}
+                                </select>
+                                {errors.category_id && <p className="mt-2 text-xs text-red-500 font-bold">{errors.category_id}</p>}
                             </div>
 
                             <div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
@@ -12,11 +13,15 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Product::with('images');
+        $query = Product::with(['images', 'category']);
 
         if ($request->search) {
             $query->where('name', 'like', '%' . $request->search . '%')
                   ->orWhere('description', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->category_id) {
+            $query->where('category_id', $request->category_id);
         }
 
         if ($request->sortBy) {
@@ -40,13 +45,16 @@ class ProductController extends Controller
 
         return Inertia::render('admin/products/index', [
             'products' => $query->get(),
-            'filters' => $request->only(['search', 'sortBy'])
+            'categories' => Category::all(),
+            'filters' => $request->only(['search', 'sortBy', 'category_id'])
         ]);
     }
 
     public function create()
     {
-        return Inertia::render('admin/products/create');
+        return Inertia::render('admin/products/create', [
+            'categories' => Category::all()
+        ]);
     }
 
     public function store(Request $request)
@@ -55,12 +63,14 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
+            'category_id' => 'required|exists:categories,id',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ]);
         $product = Product::create([
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
+            'category_id' => $request->category_id,
             'image' => '/images/mockup.png'
         ]);
 
@@ -90,14 +100,15 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         return Inertia::render('admin/products/show', [
-            'product' => $product->load('images')
+            'product' => $product->load(['images', 'category'])
         ]);
     }
 
     public function edit(Product $product)
     {
         return Inertia::render('admin/products/edit', [
-            'product' => $product->load('images')
+            'product' => $product->load(['images', 'category']),
+            'categories' => Category::all()
         ]);
     }
 
@@ -107,6 +118,7 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
+            'category_id' => 'required|exists:categories,id',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
@@ -114,6 +126,7 @@ class ProductController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
+            'category_id' => $request->category_id,
         ]);
 
         if ($request->hasFile('images')) {

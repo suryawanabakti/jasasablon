@@ -1,7 +1,28 @@
 import { Head, Link } from '@inertiajs/react';
 import React, { useState, useEffect } from 'react';
 
-export default function Welcome() {
+interface Product {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    image: string | null;
+}
+
+interface Review {
+    id: number;
+    rating: number;
+    comment: string | null;
+    user: { name: string };
+    product: { name: string };
+}
+
+interface Props {
+    products: Product[];
+    reviews: Review[];
+}
+
+export default function Welcome({ products = [], reviews = [] }: Props) {
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -11,15 +32,6 @@ export default function Welcome() {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
-
-    const products = [
-        { name: 'Kaos Sablon', price: '65rb', image: '/images/mockup.png', desc: 'Bahan Cotton Combed 30s premium.' },
-        { name: 'Hoodie', price: '150rb', image: '/images/hero.png', desc: 'Fleece tebal dan sablon awet.' },
-        { name: 'Almamater', price: '135rb', image: '/images/mockup.png', desc: 'Jas almamater berkualitas tinggi.' },
-        { name: 'Jersey', price: '110rb', image: '/images/hero.png', desc: 'Full print sublimasi tajam.' },
-        { name: 'PDH', price: '125rb', image: '/images/mockup.png', desc: 'Seragam organisasi eksklusif.' },
-        { name: 'Coach Jacket', price: '145rb', image: '/images/hero.png', desc: 'Stylish dan tahan angin.' },
-    ];
 
     return (
         <div className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900 selection:bg-orange-500 selection:text-white">
@@ -40,6 +52,7 @@ export default function Welcome() {
                         <Link href="/materials" className="text-sm font-black uppercase tracking-widest text-slate-500 hover:text-orange-600 transition-colors">Bahan</Link>
                         <Link href="#features" className="text-sm font-black uppercase tracking-widest text-slate-500 hover:text-orange-600 transition-colors">Keunggulan</Link>
                         <Link href="#how-it-works" className="text-sm font-black uppercase tracking-widest text-slate-500 hover:text-orange-600 transition-colors">Cara Pesan</Link>
+                        <Link href="#testimonials" className="text-sm font-black uppercase tracking-widest text-slate-500 hover:text-orange-600 transition-colors">Testimoni</Link>
                     </div>
                     <div className="flex items-center space-x-6">
                         <Link href="/login" className="text-sm font-black uppercase tracking-widest text-slate-500 hover:text-orange-600 transition-colors">Masuk</Link>
@@ -122,18 +135,18 @@ export default function Welcome() {
                     </div>
 
                     <div className="grid gap-12 md:grid-cols-3">
-                        {products.map((product, index) => (
+                        {products?.map((product, index) => (
                             <div key={index} className="group relative rounded-[3rem] border border-slate-100 bg-white p-5 transition-all hover:shadow-[0_48px_80px_-16px_rgba(0,0,0,0.1)] hover:-translate-y-2">
                                 <div className="aspect-[4/5] mb-8 overflow-hidden rounded-[2.5rem] bg-slate-50 shadow-inner">
-                                    <img src={product.image} alt={product.name} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                                    <img src={product.image || '/images/mockup.png'} alt={product.name} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
                                 </div>
                                 <div className="px-3 pb-6 text-center">
-                                    <h3 className="mb-3 text-3xl font-black text-slate-900 tracking-tight">{product.name}</h3>
-                                    <p className="mb-8 text-sm text-slate-500 leading-relaxed font-medium">{product.desc}</p>
+                                    <h3 className="mb-3 text-3xl font-black text-slate-900 tracking-tight line-clamp-1">{product.name}</h3>
+                                    <p className="mb-8 text-sm text-slate-500 leading-relaxed font-medium line-clamp-2">{product.description}</p>
                                     <div className="flex flex-col items-center space-y-4">
                                         <div className="text-center">
                                             <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Mulai Dari</span>
-                                            <p className="text-3xl font-black text-orange-600 tracking-tighter">Rp {product.price}</p>
+                                            <p className="text-3xl font-black text-orange-600 tracking-tighter">Rp {product.price.toLocaleString()}</p>
                                         </div>
                                         <Link href="/register" className="w-full rounded-2xl bg-slate-900 py-4 text-sm font-black uppercase tracking-widest text-white shadow-xl transition-all group-hover:bg-orange-600 group-hover:shadow-orange-600/20 active:scale-95">
                                             Pesan Sekarang
@@ -145,6 +158,40 @@ export default function Welcome() {
                     </div>
                 </div>
             </section>
+
+            {/* Testimonials */}
+            {reviews.length > 0 && (
+                <section id="testimonials" className="py-24 bg-white">
+                    <div className="container mx-auto px-6">
+                        <div className="mb-20 text-center">
+                            <span className="text-[10px] font-black tracking-[0.4em] text-orange-600 uppercase">Testimonials</span>
+                            <h2 className="mt-4 text-5xl font-black text-slate-900 md:text-7xl tracking-tighter">Apa Kata Mereka?</h2>
+                        </div>
+
+                        <div className="grid gap-10 md:grid-cols-3">
+                            {reviews?.map((review) => (
+                                <div key={review.id} className="relative rounded-[2.5rem] bg-slate-50 p-10 transition-all hover:shadow-xl hover:bg-white border border-transparent hover:border-slate-100">
+                                    <div className="mb-6 flex text-orange-400">
+                                        {[...Array(5)].map((_, i) => (
+                                            <span key={i} className={i < review.rating ? 'text-yellow-400' : 'text-slate-200'}>★</span>
+                                        ))}
+                                    </div>
+                                    <p className="mb-8 text-lg font-medium leading-relaxed text-slate-600 italic">"{review.comment}"</p>
+                                    <div className="flex items-center space-x-4">
+                                        <div className="h-12 w-12 rounded-full bg-orange-100 flex items-center justify-center font-black text-orange-600">
+                                            {review.user.name.charAt(0)}
+                                        </div>
+                                        <div>
+                                            <h4 className="font-black text-slate-900">{review.user.name}</h4>
+                                            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{review.product.name}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
 
             {/* How It Works */}
             <section id="how-it-works" className="py-24 bg-[#F8FAFC]">

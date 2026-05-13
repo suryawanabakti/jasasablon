@@ -37,9 +37,15 @@ class ProductController extends Controller
             $query->latest();
         }
 
+        if ($request->category_id) {
+            $query->where('category_id', $request->category_id);
+        }
+
         return Inertia::render('customer/products/index', [
             'products' => $query->get(),
-            'filters' => $request->only(['search', 'sortBy'])
+            'categories' => \App\Models\Category::all(),
+            'addons' => \App\Models\Addon::all(),
+            'filters' => $request->only(['search', 'sortBy', 'category_id'])
         ]);
     }
 }

@@ -2,11 +2,21 @@ import AdminLayout from '@/layouts/admin-layout';
 import { Head, useForm, Link } from '@inertiajs/react';
 import React, { useState } from 'react';
 
-export default function ProductCreate() {
+interface Category {
+    id: number;
+    name: string;
+}
+
+interface Props {
+    categories: Category[];
+}
+
+export default function ProductCreate({ categories }: Props) {
     const { data, setData, post, processing, errors } = useForm({
         name: '',
         description: '',
         price: 0,
+        category_id: '' as string | number,
         images: [] as File[]
     });
 
@@ -69,6 +79,22 @@ export default function ProductCreate() {
                                     required
                                 />
                                 {errors.name && <p className="mt-2 text-xs text-red-500 font-bold">{errors.name}</p>}
+                            </div>
+
+                            <div>
+                                <label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-3">Kategori</label>
+                                <select
+                                    value={data.category_id}
+                                    onChange={(e) => setData('category_id', Number(e.target.value))}
+                                    className="w-full rounded-2xl border-slate-100 bg-slate-50 px-5 py-4 text-sm focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-500/10 transition-all outline-none cursor-pointer"
+                                    required
+                                >
+                                    <option value="">Pilih Kategori...</option>
+                                    {categories.map((cat) => (
+                                        <option key={cat.id} value={cat.id}>{cat.name}</option>
+                                    ))}
+                                </select>
+                                {errors.category_id && <p className="mt-2 text-xs text-red-500 font-bold">{errors.category_id}</p>}
                             </div>
 
                             <div>

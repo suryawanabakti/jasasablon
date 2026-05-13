@@ -8,40 +8,63 @@ interface ProductImage {
     is_primary: boolean;
 }
 
+interface Category {
+    id: number;
+    name: string;
+}
+
 interface Product {
     id: number;
     name: string;
     description: string;
     price: number;
+    category_id: number | null;
+    category: Category | null;
     image: string | null;
     images: ProductImage[];
 }
 
 interface Props {
     products: Product[];
+    categories: Category[];
     filters: {
         search?: string;
         sortBy?: string;
+        category_id?: string;
     }
 }
 
-export default function ProductsIndex({ products, filters }: Props) {
+export default function ProductsIndex({ products, categories, filters }: Props) {
     const [search, setSearch] = useState(filters?.search ?? '');
     const [sortBy, setSortBy] = useState(filters?.sortBy ?? '');
+    const [categoryId, setCategoryId] = useState(filters?.category_id ?? '');
+
+    const applyFilters = (overrides: Record<string, string> = {}) => {
+        const params = { search, sortBy, category_id: categoryId, ...overrides };
+        // Remove empty values
+        const cleaned = Object.fromEntries(Object.entries(params).filter(([_, v]) => v));
+        router.get('/admin/products', cleaned, { preserveState: true });
+    };
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
-        router.get('/admin/products', { search, sortBy }, { preserveState: true });
+        applyFilters();
     };
 
     const handleSort = (newSort: string) => {
         setSortBy(newSort);
-        router.get('/admin/products', { search, sortBy: newSort }, { preserveState: true });
+        applyFilters({ sortBy: newSort });
+    };
+
+    const handleCategoryFilter = (newCatId: string) => {
+        setCategoryId(newCatId);
+        applyFilters({ category_id: newCatId });
     };
 
     const handleReset = () => {
         setSearch('');
         setSortBy('');
+        setCategoryId('');
         router.get('/admin/products', {}, { preserveState: true });
     };
 
@@ -50,6 +73,8 @@ export default function ProductsIndex({ products, filters }: Props) {
             router.delete(`/admin/products/${id}`);
         }
     };
+
+    const hasActiveFilters = search || sortBy || categoryId;
 
     return (
         <AdminLayout>
@@ -76,6 +101,17 @@ export default function ProductsIndex({ products, filters }: Props) {
                     </form>
 
                     <select
+                        value={categoryId}
+                        onChange={(e) => handleCategoryFilter(e.target.value)}
+                        className="rounded-2xl border-slate-100 bg-white px-5 py-3 text-sm font-bold text-slate-600 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 transition-all outline-none cursor-pointer"
+                    >
+                        <option value="">Semua Kategori</option>
+                        {categories.map((cat) => (
+                            <option key={cat.id} value={cat.id}>{cat.name}</option>
+                        ))}
+                    </select>
+
+                    <select
                         value={sortBy}
                         onChange={(e) => handleSort(e.target.value)}
                         className="rounded-2xl border-slate-100 bg-white px-5 py-3 text-sm font-bold text-slate-600 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 transition-all outline-none cursor-pointer"
@@ -85,7 +121,7 @@ export default function ProductsIndex({ products, filters }: Props) {
                         <option value="price_desc">Harga Tertinggi</option>
                     </select>
 
-                    {(search || sortBy) && (
+                    {hasActiveFilters && (
                         <button
                             onClick={handleReset}
                             className="flex items-center space-x-2 rounded-2xl bg-slate-100 px-4 py-3 text-sm font-bold text-slate-500 hover:bg-red-50 hover:text-red-600 transition-all shadow-sm"
@@ -118,6 +154,11 @@ export default function ProductsIndex({ products, filters }: Props) {
                             )}
                         </Link>
                         <div className="px-2 pb-2">
+                            {product.category && (
+                                <span className="inline-block mb-2 px-3 py-1 rounded-full bg-orange-50 text-[10px] font-black text-orange-600 uppercase tracking-widest">
+                                    {product.category.name}
+                                </span>
+                            )}
                             <Link href={`/admin/products/${product.id}`}>
                                 <h3 className="mb-1 text-xl font-black text-slate-900 hover:text-orange-600 transition-colors">{product.name}</h3>
                             </Link>

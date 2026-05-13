@@ -2,9 +2,10 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::inertia('/', 'welcome')->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::inertia('/materials', 'materials')->name('materials');
 
 Route::middleware('guest')->group(function () {
@@ -57,4 +58,7 @@ Route::middleware(['auth'])->group(function () {
 
     // AI Chat
     Route::post('/ai-chat', [\App\Http\Controllers\Customer\AiChatController::class, 'chat'])->name('ai.chat');
+
+    // Reviews
+    Route::post('/reviews', [\App\Http\Controllers\ReviewController::class, 'store'])->name('reviews.store');
 });

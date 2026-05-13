@@ -56,4 +56,16 @@ class Order extends Model
             ->where('status', 'approved')
             ->exists();
     }
+
+    public function review()
+    {
+        return $this->hasOne(Review::class);
+    }
+
+    public function addons()
+    {
+        return $this->belongsToMany(Addon::class, 'order_addons')
+            ->withPivot('price', 'notes')
+            ->withTimestamps();
+    }
 }

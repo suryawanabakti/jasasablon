@@ -8,6 +8,7 @@ interface Order {
     qty: number;
     total_price: number;
     status: string;
+    review: any;
     created_at: string;
 }
 
@@ -60,6 +61,11 @@ export default function OrdersIndex({ orders }: Props) {
                                             <span className={`rounded-full px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider ${getStatusColor(order.status)}`}>
                                                 {order.status.replace('_', ' ')}
                                             </span>
+                                            {order.review && (
+                                                <span className="rounded-full bg-yellow-100 text-yellow-600 px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider flex items-center">
+                                                    <span className="mr-1">★</span> Diulas
+                                                </span>
+                                            )}
                                         </div>
                                         <h3 className="text-xl font-black text-slate-900">{order.product.name}</h3>
                                         <p className="text-sm text-slate-500">{order.qty} pcs • Rp {order.total_price.toLocaleString()}</p>

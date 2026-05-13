@@ -10,8 +10,14 @@ class Product extends Model
         'name',
         'description',
         'price',
-        'image'
+        'image',
+        'category_id'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     public function images()
     {
@@ -21,5 +27,10 @@ class Product extends Model
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 }

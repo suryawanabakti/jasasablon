@@ -17,11 +17,26 @@ interface Product {
     images: ProductImage[];
 }
 
+interface Addon {
+    id: number;
+    name: string;
+    description: string | null;
+    price: number;
+}
+
+interface Category {
+    id: number;
+    name: string;
+}
+
 interface Props {
     products: Product[];
+    categories: Category[];
+    addons: Addon[];
     filters: {
         search?: string;
         sortBy?: string;
+        category_id?: string;
     }
 }
 
@@ -84,25 +99,32 @@ function ProductCard({ product, openOrderModal }: { product: Product, openOrderM
     );
 }
 
-export default function ProductsIndex({ products, filters }: Props) {
+export default function ProductsIndex({ products = [], categories = [], addons = [], filters }: Props) {
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [search, setSearch] = useState(filters?.search ?? '');
     const [sortBy, setSortBy] = useState(filters?.sortBy ?? '');
+    const [categoryId, setCategoryId] = useState(filters?.category_id ?? '');
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
-        router.get('/products', { search, sortBy }, { preserveState: true });
+        router.get('/products', { search, sortBy, category_id: categoryId }, { preserveState: true });
     };
 
     const handleSort = (newSort: string) => {
         setSortBy(newSort);
-        router.get('/products', { search, sortBy: newSort }, { preserveState: true });
+        router.get('/products', { search, sortBy: newSort, category_id: categoryId }, { preserveState: true });
+    };
+
+    const handleCategory = (newCat: string) => {
+        setCategoryId(newCat);
+        router.get('/products', { search, sortBy, category_id: newCat }, { preserveState: true });
     };
 
     const handleReset = () => {
         setSearch('');
         setSortBy('');
+        setCategoryId('');
         router.get('/products', {}, { preserveState: true });
     };
 
@@ -110,8 +132,35 @@ export default function ProductsIndex({ products, filters }: Props) {
         product_id: '',
         qty: 1,
         note: '',
-        design: null as File | null
+        design: null as File | null,
+        addon_ids: [] as number[],
+        addon_notes: {} as Record<number, string>
     });
+
+    const toggleAddon = (addonId: number) => {
+        const current = [...data.addon_ids];
+        const index = current.indexOf(addonId);
+        if (index > -1) {
+            current.splice(index, 1);
+            // Also clear the note for this addon
+            const updatedNotes = { ...data.addon_notes };
+            delete updatedNotes[addonId];
+            setData('addon_notes', updatedNotes);
+        } else {
+            current.push(addonId);
+        }
+        setData('addon_ids', current);
+    };
+
+    const setAddonNote = (addonId: number, note: string) => {
+        setData('addon_notes', { ...data.addon_notes, [addonId]: note });
+    };
+
+    const calculateAddonTotal = () => {
+        return addons
+            .filter(a => data.addon_ids.includes(a.id))
+            .reduce((sum, a) => sum + a.price, 0);
+    };
 
     const openOrderModal = (product: Product) => {
         setSelectedProduct(product);
@@ -119,7 +168,9 @@ export default function ProductsIndex({ products, filters }: Props) {
             product_id: product.id.toString(),
             qty: 1,
             note: '',
-            design: null
+            design: null,
+            addon_ids: [],
+            addon_notes: {}
         });
         setIsModalOpen(true);
     };
@@ -158,19 +209,35 @@ export default function ProductsIndex({ products, filters }: Props) {
                         </svg>
                     </form>
 
-                    <div className="flex items-center space-x-3">
-                        <label className="hidden sm:block text-xs font-black uppercase tracking-widest text-slate-400">Urutkan:</label>
-                        <select
-                            value={sortBy}
-                            onChange={(e) => handleSort(e.target.value)}
-                            className="flex-1 sm:flex-none rounded-[1.5rem] border-slate-100 bg-white px-6 py-4 text-sm font-bold text-slate-700 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 transition-all outline-none cursor-pointer shadow-sm"
-                        >
-                            <option value="">Terbaru</option>
-                            <option value="price_asc">Harga Terendah</option>
-                            <option value="price_desc">Harga Tertinggi</option>
-                        </select>
+                    <div className="flex flex-wrap items-center gap-4">
+                        <div className="flex items-center space-x-3">
+                            <label className="hidden sm:block text-xs font-black uppercase tracking-widest text-slate-400">Kategori:</label>
+                            <select
+                                value={categoryId}
+                                onChange={(e) => handleCategory(e.target.value)}
+                                className="rounded-[1.5rem] border-slate-100 bg-white px-6 py-4 text-sm font-bold text-slate-700 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 transition-all outline-none cursor-pointer shadow-sm"
+                            >
+                                <option value="">Semua Kategori</option>
+                                {categories?.map(cat => (
+                                    <option key={cat.id} value={cat.id}>{cat.name}</option>
+                                ))}
+                            </select>
+                        </div>
 
-                        {(search || sortBy) && (
+                        <div className="flex items-center space-x-3">
+                            <label className="hidden sm:block text-xs font-black uppercase tracking-widest text-slate-400">Urutkan:</label>
+                            <select
+                                value={sortBy}
+                                onChange={(e) => handleSort(e.target.value)}
+                                className="rounded-[1.5rem] border-slate-100 bg-white px-6 py-4 text-sm font-bold text-slate-700 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 transition-all outline-none cursor-pointer shadow-sm"
+                            >
+                                <option value="">Terbaru</option>
+                                <option value="price_asc">Harga Terendah</option>
+                                <option value="price_desc">Harga Tertinggi</option>
+                            </select>
+                        </div>
+
+                        {(search || sortBy || categoryId) && (
                             <button
                                 onClick={handleReset}
                                 className="flex items-center space-x-2 rounded-[1.5rem] bg-slate-100 px-6 py-4 text-sm font-bold text-slate-500 hover:bg-red-50 hover:text-red-600 transition-all shadow-sm"
@@ -246,6 +313,61 @@ export default function ProductsIndex({ products, filters }: Props) {
                             </div>
 
                             <div>
+                                <label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-4">Tambahan (Opsional)</label>
+                                <div className="grid grid-cols-1 gap-3">
+                                    {addons?.map(addon => (
+                                        <div key={addon.id} className="space-y-0">
+                                            <div
+                                                onClick={() => toggleAddon(addon.id)}
+                                                className={`flex items-center justify-between p-4 rounded-2xl border-2 transition-all cursor-pointer ${
+                                                    data.addon_ids.includes(addon.id)
+                                                        ? 'border-orange-500 bg-orange-50'
+                                                        : 'border-slate-100 bg-white hover:border-slate-200'
+                                                }`}
+                                            >
+                                                <div className="flex items-center space-x-3">
+                                                    <div className={`h-5 w-5 rounded-md border-2 flex items-center justify-center transition-all ${
+                                                        data.addon_ids.includes(addon.id)
+                                                            ? 'bg-orange-500 border-orange-500'
+                                                            : 'border-slate-300'
+                                                    }`}>
+                                                        {data.addon_ids.includes(addon.id) && (
+                                                            <svg className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M5 13l4 4L19 7" />
+                                                            </svg>
+                                                        )}
+                                                    </div>
+                                                    <div>
+                                                        <span className={`text-sm font-bold ${data.addon_ids.includes(addon.id) ? 'text-orange-900' : 'text-slate-700'}`}>
+                                                            {addon.name}
+                                                        </span>
+                                                        {addon.description && (
+                                                            <p className="text-[11px] text-slate-400 mt-0.5">{addon.description}</p>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                                <span className={`text-xs font-black ${data.addon_ids.includes(addon.id) ? 'text-orange-600' : 'text-slate-400'}`}>
+                                                    + Rp {addon.price.toLocaleString()}
+                                                </span>
+                                            </div>
+                                            {data.addon_ids.includes(addon.id) && addon.description && (
+                                                <div className="ml-8 mt-2 mb-1">
+                                                    <input
+                                                        type="text"
+                                                        value={data.addon_notes[addon.id] || ''}
+                                                        onChange={(e) => setAddonNote(addon.id, e.target.value)}
+                                                        onClick={(e) => e.stopPropagation()}
+                                                        className="w-full rounded-xl border-orange-200 bg-orange-50/50 px-4 py-2.5 text-sm focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-500/10 transition-all outline-none"
+                                                        placeholder={addon.description}
+                                                    />
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div>
                                 <label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Catatan Pesanan</label>
                                 <textarea
                                     value={data.note}
@@ -257,8 +379,8 @@ export default function ProductsIndex({ products, filters }: Props) {
 
                             <div className="rounded-2xl bg-orange-50 p-4 text-center">
                                 <p className="text-xs font-bold text-orange-400 uppercase tracking-widest">Total Bayar</p>
-                                <p className="text-3xl font-black text-orange-600">Rp {(selectedProduct.price * data.qty).toLocaleString()}</p>
-                                <p className="mt-1 text-[10px] font-bold text-orange-400 uppercase tracking-widest">DP 50% (Rp {(selectedProduct.price * data.qty * 0.5).toLocaleString()})</p>
+                                <p className="text-3xl font-black text-orange-600">Rp {((selectedProduct.price + calculateAddonTotal()) * data.qty).toLocaleString()}</p>
+                                <p className="mt-1 text-[10px] font-bold text-orange-400 uppercase tracking-widest">DP 50% (Rp {((selectedProduct.price + calculateAddonTotal()) * data.qty * 0.5).toLocaleString()})</p>
                             </div>
 
                             <div className="flex space-x-3 pt-2">

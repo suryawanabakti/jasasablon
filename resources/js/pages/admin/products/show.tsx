@@ -8,13 +8,21 @@ interface ProductImage {
     is_primary: boolean;
 }
 
+interface Category {
+    id: number;
+    name: string;
+}
+
 interface Product {
     id: number;
     name: string;
     description: string;
     price: number;
+    category_id: number | null;
+    category: Category | null;
     image: string | null;
     images: ProductImage[];
+    created_at: string;
 }
 
 interface Props {
@@ -82,6 +90,15 @@ export default function ProductShow({ product }: Props) {
                 {/* Details Section */}
                 <div className="space-y-8">
                     <div className="bg-white rounded-[3rem] border border-slate-100 p-10 shadow-sm space-y-8">
+                        {product.category && (
+                            <div>
+                                <label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Kategori</label>
+                                <span className="inline-flex items-center px-4 py-2 rounded-full bg-orange-50 text-orange-600 text-xs font-black uppercase tracking-widest">
+                                    {product.category.name}
+                                </span>
+                            </div>
+                        )}
+
                         <div>
                             <label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Harga Jual</label>
                             <p className="text-4xl font-black text-orange-600">Rp {product.price.toLocaleString()}</p>
@@ -104,7 +121,7 @@ export default function ProductShow({ product }: Props) {
                             <div>
                                 <label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-1">Dibuat Pada</label>
                                 <p className="text-sm font-bold text-slate-900">
-                                    {new Date(product.created_at as any).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+                                    {new Date(product.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
                                 </p>
                             </div>
                         </div>

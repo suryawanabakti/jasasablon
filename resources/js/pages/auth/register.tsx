@@ -5,6 +5,8 @@ export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
+        phone: '',
+        address: '',
         password: '',
         password_confirmation: '',
     });
@@ -55,6 +57,31 @@ export default function Register() {
                                 required
                             />
                             {errors.email && <p className="mt-1 text-xs font-medium text-red-500">{errors.email}</p>}
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-bold text-slate-700 mb-2">No. HP</label>
+                            <input
+                                type="tel"
+                                value={data.phone}
+                                onChange={(e) => setData('phone', e.target.value)}
+                                className="w-full rounded-2xl border-slate-200 bg-slate-50 px-4 py-3 text-sm transition-all focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-500/10 outline-none"
+                                placeholder="Contoh: 08123456789"
+                                required
+                            />
+                            {errors.phone && <p className="mt-1 text-xs font-medium text-red-500">{errors.phone}</p>}
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-bold text-slate-700 mb-2">Alamat</label>
+                            <textarea
+                                value={data.address}
+                                onChange={(e) => setData('address', e.target.value)}
+                                className="w-full rounded-2xl border-slate-200 bg-slate-50 px-4 py-3 text-sm transition-all focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-500/10 outline-none resize-none h-24"
+                                placeholder="Masukkan alamat lengkap"
+                                required
+                            ></textarea>
+                            {errors.address && <p className="mt-1 text-xs font-medium text-red-500">{errors.address}</p>}
                         </div>
 
                         <div>
