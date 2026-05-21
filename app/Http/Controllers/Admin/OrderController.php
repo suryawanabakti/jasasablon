@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
@@ -40,5 +41,33 @@ class OrderController extends Controller
         $order->update(['status' => $request->status]);
 
         return back()->with('success', 'Status pesanan berhasil diperbarui.');
+    }
+
+    public function destroy(Order $order)
+    {
+        // Prevent deletion if there are any approved payments
+        if ($order->payments()->where('status', 'approved')->exists()) {
+            return back()->with('error', 'Pesanan tidak dapat dihapus karena sudah ada pembayaran yang disetujui.');
+        }
+
+        // delete design file if exists
+        if ($order->design) {
+            Storage::disk('public')->delete($order->design);
+        }
+
+        // delete payment proofs and payments
+        foreach ($order->payments as $payment) {
+            if ($payment->proof) {
+                Storage::disk('public')->delete($payment->proof);
+            }
+            $payment->delete();
+        }
+
+        // detach addons
+        $order->addons()->detach();
+
+        $order->delete();
+
+        return back()->with('success', 'Pesanan berhasil dihapus.');
     }
 }

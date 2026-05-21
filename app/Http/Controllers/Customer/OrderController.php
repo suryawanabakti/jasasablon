@@ -9,6 +9,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
@@ -99,5 +100,37 @@ class OrderController extends Controller
         ]);
 
         return back()->with('success', 'Bukti pembayaran berhasil diunggah. Menunggu verifikasi admin.');
+    }
+
+    public function destroy(Order $order)
+    {
+        if ($order->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        // Prevent deletion if there are any approved payments
+        if ($order->payments()->where('status', 'approved')->exists()) {
+            return back()->with('error', 'Pesanan tidak dapat dihapus karena sudah ada pembayaran yang disetujui.');
+        }
+
+        // delete design file if exists
+        if ($order->design) {
+            Storage::disk('public')->delete($order->design);
+        }
+
+        // delete payment proofs and payments
+        foreach ($order->payments as $payment) {
+            if ($payment->proof) {
+                Storage::disk('public')->delete($payment->proof);
+            }
+            $payment->delete();
+        }
+
+        // detach addons
+        $order->addons()->detach();
+
+        $order->delete();
+
+        return redirect()->route('orders.index')->with('success', 'Pesanan berhasil dihapus.');
     }
 }

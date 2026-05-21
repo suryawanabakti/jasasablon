@@ -14,6 +14,6 @@ class Company extends Model
         'email',
         'address',
         'instagram',
-        'facebook'
+        'facebook',
     ];
 }
