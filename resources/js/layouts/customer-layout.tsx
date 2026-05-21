@@ -18,7 +18,6 @@ export default function CustomerLayout({ children }: Props) {
         { name: 'Dashboard', href: '/dashboard', icon: '🏠' },
         { name: 'Profil Saya', href: '/profile', icon: '🙍' },
         { name: 'Katalog Produk', href: '/products', icon: '👕' },
-        { name: 'Bahan Kaos', href: '/materials', icon: '🧵' },
         { name: 'Pesanan Saya', href: '/orders', icon: '📦' },
     ];
 
