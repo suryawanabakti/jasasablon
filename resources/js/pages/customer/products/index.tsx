@@ -52,12 +52,12 @@ function ProductCard({
         product.images && product.images.length > 0
             ? product.images
             : [
-                  {
-                      id: 0,
-                      image: product.image || '/images/mockup.png',
-                      is_primary: true,
-                  },
-              ];
+                {
+                    id: 0,
+                    image: product.image || '/images/mockup.png',
+                    is_primary: true,
+                },
+            ];
 
     const nextImage = (e: React.MouseEvent) => {
         e.stopPropagation();
@@ -203,9 +203,9 @@ export default function ProductsIndex({
         router.get('/products', {}, { preserveState: true });
     };
 
-    const { data, setData, post, processing, reset } = useForm({
+    const { data, setData, post, processing, errors, reset } = useForm({
         product_id: '',
-        qty: 1,
+        qty: 32,
         note: '',
         design: null as File | null,
         addon_ids: [] as number[],
@@ -241,7 +241,7 @@ export default function ProductsIndex({
         setSelectedProduct(product);
         setData({
             product_id: product.id.toString(),
-            qty: 1,
+            qty: 32,
             note: '',
             design: null,
             addon_ids: [],
@@ -414,13 +414,19 @@ export default function ProductsIndex({
                                 </label>
                                 <input
                                     type="number"
-                                    min="1"
+                                    min="32"
+
                                     onChange={(e) =>
                                         setData('qty', Number(e.target.value))
                                     }
                                     className="w-full rounded-2xl border-slate-100 bg-slate-50 px-4 py-3 text-sm transition-all outline-none focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-500/10"
                                     required
                                 />
+                                {errors.qty && (
+                                    <p className="mt-1 text-xs text-red-500">
+                                        {errors.qty}
+                                    </p>
+                                )}
                             </div>
 
                             <div>
@@ -456,7 +462,7 @@ export default function ProductsIndex({
                                                             'design',
                                                             e.target.files
                                                                 ? e.target
-                                                                      .files[0]
+                                                                    .files[0]
                                                                 : null,
                                                         )
                                                     }
@@ -469,6 +475,11 @@ export default function ProductsIndex({
                                         {data.design && (
                                             <p className="text-xs font-bold text-green-600">
                                                 Terpilih: {data.design.name}
+                                            </p>
+                                        )}
+                                        {errors.design && (
+                                            <p className="mt-1 text-xs text-red-500">
+                                                {errors.design}
                                             </p>
                                         )}
                                     </div>
@@ -489,43 +500,41 @@ export default function ProductsIndex({
                                                 onClick={() =>
                                                     toggleAddon(addon.id)
                                                 }
-                                                className={`flex cursor-pointer items-center justify-between rounded-2xl border-2 p-4 transition-all ${
-                                                    data.addon_ids.includes(
-                                                        addon.id,
-                                                    )
+                                                className={`flex cursor-pointer items-center justify-between rounded-2xl border-2 p-4 transition-all ${data.addon_ids.includes(
+                                                    addon.id,
+                                                )
                                                         ? 'border-orange-500 bg-orange-50'
                                                         : 'border-slate-100 bg-white hover:border-slate-200'
-                                                }`}
+                                                    }`}
                                             >
                                                 <div className="flex items-center space-x-3">
                                                     <div
-                                                        className={`flex h-5 w-5 items-center justify-center rounded-md border-2 transition-all ${
-                                                            data.addon_ids.includes(
-                                                                addon.id,
-                                                            )
+                                                        className={`flex h-5 w-5 items-center justify-center rounded-md border-2 transition-all ${data.addon_ids.includes(
+                                                            addon.id,
+                                                        )
                                                                 ? 'border-orange-500 bg-orange-500'
                                                                 : 'border-slate-300'
-                                                        }`}
+                                                            }`}
                                                     >
                                                         {data.addon_ids.includes(
                                                             addon.id,
                                                         ) && (
-                                                            <svg
-                                                                className="h-3 w-3 text-white"
-                                                                fill="none"
-                                                                viewBox="0 0 24 24"
-                                                                stroke="currentColor"
-                                                            >
-                                                                <path
-                                                                    strokeLinecap="round"
-                                                                    strokeLinejoin="round"
-                                                                    strokeWidth={
-                                                                        4
-                                                                    }
-                                                                    d="M5 13l4 4L19 7"
-                                                                />
-                                                            </svg>
-                                                        )}
+                                                                <svg
+                                                                    className="h-3 w-3 text-white"
+                                                                    fill="none"
+                                                                    viewBox="0 0 24 24"
+                                                                    stroke="currentColor"
+                                                                >
+                                                                    <path
+                                                                        strokeLinecap="round"
+                                                                        strokeLinejoin="round"
+                                                                        strokeWidth={
+                                                                            4
+                                                                        }
+                                                                        d="M5 13l4 4L19 7"
+                                                                    />
+                                                                </svg>
+                                                            )}
                                                     </div>
                                                     <div>
                                                         <span
@@ -559,7 +568,7 @@ export default function ProductsIndex({
                                                             value={
                                                                 data
                                                                     .addon_notes[
-                                                                    addon.id
+                                                                addon.id
                                                                 ] || ''
                                                             }
                                                             onChange={(e) =>

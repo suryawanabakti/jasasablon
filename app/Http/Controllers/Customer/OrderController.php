@@ -27,7 +27,7 @@ class OrderController extends Controller
     {
         $request->validate([
             'product_id' => 'required|exists:products,id',
-            'qty' => 'required|integer|min:1',
+            'qty' => 'required|integer|min:32',
             'note' => 'nullable|string',
             'design' => 'nullable|image|max:5120',
             'addon_ids' => 'nullable|array',
