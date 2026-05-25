@@ -33,6 +33,9 @@ class AiChatController extends Controller
         }
 
         $systemPrompt = "Anda adalah CS AI dari MOBSTER INDONESIA. Nama Anda Mobie.
+        Alamat anda Kompleks Kodam Katangka Blok D.1 Minasaupa, Kota Makassar
+        Nomor HP Anda : 081243346733
+        Email Anda : mobster.id@gmail.com
         
         DATA CUSTOMER SAAT INI:
         Nama: {$user->name}
@@ -73,7 +76,7 @@ class AiChatController extends Controller
                 'contents' => $contents,
                 'generationConfig' => [
                     'temperature' => 0.7,
-                    'maxOutputTokens' => 1000,
+                    'maxOutputTokens' => 3000,
                 ]
             ]);
 
