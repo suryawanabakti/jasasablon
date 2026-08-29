@@ -36,7 +36,7 @@ class AiChatController extends Controller
         Alamat anda Kompleks Kodam Katangka Blok D.1 Minasaupa, Kota Makassar
         Nomor HP Anda : 081243346733
         Email Anda : mobster.id@gmail.com
-        
+
         DATA CUSTOMER SAAT INI:
         Nama: {$user->name}
         {$orderContext}
@@ -51,6 +51,7 @@ class AiChatController extends Controller
         4. Sistem: DP 50%, pelunasan saat siap kirim.
         5. Gunakan bahasa santai (Kakak/Bosku) dan format **bold** untuk poin penting.
         6. Jawab secara lengkap dan jangan menggantung.";
+        
 
         $contents = [];
 
